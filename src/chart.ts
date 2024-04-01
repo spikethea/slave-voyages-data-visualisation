@@ -1,15 +1,26 @@
 import * as d3 from 'd3';
+import { determineNationality } from './data-proccesing';
 const filepath = "data.csv";
 
 export function setupChart(element: HTMLButtonElement) {
   let self = element;
 
+  // html template delivered as closure functino, for future logic handling in the popup
+  const HtmlTemplate = (data: d3.DSVRowString<string>) => {
 
+
+
+    let template = `
+    <div>
+      <h3>${data.shipname}</h3>
+      <p>This ${determineNationality(data.national)} Voyage carried ${data.slaarriv} captured Africans ${ 'from port ' + data.arrport} to ${data.sla1port}</p>
+    </div>
+    `
+    return template
+  }
   
-  const data:  Array<number> = [12, 5, 6, 6, 9, 10];
-
   let margin = {top: 10, right: 30, bottom: 30, left: 60};
-    let width = 460 - margin.left - margin.right;
+    let width = 800 - margin.left - margin.right;
     let height = 400 - margin.top - margin.bottom;
 
   const svg = d3.select(self)
@@ -26,12 +37,23 @@ export function setupChart(element: HTMLButtonElement) {
     let x = d3.scaleLinear()
       .domain([1500, 1800])
       .range([0, width]);
+
+      svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+
+
     let y = d3.scaleLinear()
     .domain([0, 500])
     .range([ height, 0]);
 
-    svg.append("g")
-    .call(d3.axisLeft(y));
+      svg.append("g")
+      .call(d3.axisLeft(y));
+
+    // data pop-up, made initially invisible
+    let div = d3.select("body").append("div")
+      .attr("class", "info-bubble")
+      .style("opacity", 0);
 
     svg.append('g')
     .selectAll("dot")
@@ -42,6 +64,29 @@ export function setupChart(element: HTMLButtonElement) {
       .attr("cy", function (d) { return y(d.slaarriv); } )
       .attr("r", 1.5)
       .style("fill", "#69b3a2")
+    
+      .on('mouseover', function(event, d) {
+        d3.select(this).transition()
+                .duration(50)
+                .style("fill", "red")
+
+                div.html(HtmlTemplate(d))
+                  .style("left", (event.pageX + 10) + "px")
+                  .style("top", (event.pageY - 15) + "px");
+
+                div.transition()
+                .duration(50)
+                .style("opacity", 1);
+      })
+      .on('mouseout', function(d, i ) {
+        d3.select(this).transition()
+                .duration(50)
+                .style("fill", '#69b3a2')
+
+        div.transition()
+        .duration(50)
+        .style("opacity", 0);
+      })
 
   });
 

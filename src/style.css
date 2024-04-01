@@ -35,6 +35,15 @@ h1 {
   line-height: 1.1;
 }
 
+.info-bubble {
+  position: absolute;
+  border: 1px solid grey;
+  border-radius: 1rem;
+  pointer-events: none;
+  background-color: white;
+  padding: 1rem;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
