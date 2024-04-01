@@ -60,8 +60,8 @@ export function setupChart(element: HTMLButtonElement) {
     .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.yearam); } )
-      .attr("cy", function (d) { return y(d.slaarriv); } )
+      .attr("cx", function (d) { return x(Number(d.yearam)); } )
+      .attr("cy", function (d) { return y(Number(d.slaarriv)); } )
       .attr("r", 1.5)
       .style("fill", "#69b3a2")
     
