@@ -12,8 +12,8 @@ export function setupChart(element: HTMLButtonElement) {
 
     let template = `
     <div>
-      <h3>${data.shipname}</h3>
-      <p>This ${determineNationality(data.national)} Voyage carried ${data.slaarriv} captured Africans ${ 'from port ' + data.arrport} to ${data.sla1port}</p>
+      <h3>${data.shipname} - ${data.yearam}</h3>
+      <p>This ${determineNationality(data.national)} Voyage carried ${data.slaarriv} captured Africans to port ${data.sla1port}</p>
     </div>
     `
     return template

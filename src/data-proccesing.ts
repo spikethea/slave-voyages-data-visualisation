@@ -61,7 +61,7 @@ export function determineNationality (nationalityString: string) {
       case 26:
         nationality = 'Prussian'
       break;
-      case 26:
+      case 27:
         nationality = 'German (Bremen)'
       break;
       default: nationality = 'Unknown';
