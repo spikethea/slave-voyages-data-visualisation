@@ -11,8 +11,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <div id="scatter-chart"></div>
     </div>
       <div id="pie-chart"></div>
-      <div class="piechart-slider">
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+      <div class="">
+        <input type="range" min="1" max="100" value="50" class="piechart-slider" id="myRange">
       </div>
     <div class="card">
       <div id="treemap"></div>
