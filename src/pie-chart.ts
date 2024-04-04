@@ -40,7 +40,7 @@ const svg = d3.select(element)
     const pie = d3.pie()
       .value(d=>d[1])
 
-    const data_ready = pie(Object.entries(data[rangeInput]))
+    const data_ready = pie(Object.entries(data[5]))
 
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     svg
