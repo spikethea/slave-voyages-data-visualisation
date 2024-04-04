@@ -1,12 +1,8 @@
 import * as d3 from 'd3';
 const filepath = "named-data.csv";
 
-interface DataType {
-    id: string;
-    display: string;
-  }
 
-export default function setupMap (element: HTMLDivElement) {
+export default function setupTreeMap (element: HTMLDivElement) {
     let margin = {top: 10, right: 30, bottom: 30, left: 60};
     let width = 800 - margin.left - margin.right;
     let height = 400 - margin.top - margin.bottom;

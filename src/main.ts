@@ -1,6 +1,6 @@
 import './style.css'
 import { setupChart } from './scatter-chart.ts'
-import setupMap from './tree-map.ts'
+//import setupTreeMap from './tree-map.ts'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
@@ -10,7 +10,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <div id="chart"></div>
     </div>
     <div class="card">
-      <div id="scatter"></div>
+      <div id="treemap"></div>
     </div>
     <p class="read-the-docs">
       A interactive data visualisation of the many voyages from europe to the americas in the transatlantic slave trade.
@@ -19,4 +19,4 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `
 
 setupChart(document.querySelector<HTMLButtonElement>('#chart')!);
-setupMap(document.querySelector<HTMLDivElement>('.scatter')!)
+//setupTreeMap(document.querySelector<HTMLDivElement>('.treemap')!)
