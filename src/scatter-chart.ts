@@ -3,7 +3,6 @@ import { determineNationality } from './data-proccesing';
 const filepath = "data.csv";
 
 export function setupChart(element: HTMLButtonElement) {
-  let self = element;
 
   // html template delivered as closure functino, for future logic handling in the popup
   const HtmlTemplate = (data: d3.DSVRowString<string>) => {
@@ -23,7 +22,7 @@ export function setupChart(element: HTMLButtonElement) {
     let width = 800 - margin.left - margin.right;
     let height = 400 - margin.top - margin.bottom;
 
-  const svg = d3.select(self)
+  const svg = d3.select(element)
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -33,7 +32,7 @@ export function setupChart(element: HTMLButtonElement) {
 
         
   d3.csv(filepath).then(function (data) {
-    console.log(data)
+    // console.log(data)
     let x = d3.scaleLinear()
       .domain([1500, 1800])
       .range([0, width]);
