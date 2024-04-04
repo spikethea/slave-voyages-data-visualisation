@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { determineNationality } from './data-proccesing';
 const filepath = "data.csv";
 
-export function setupChart(element: HTMLButtonElement) {
+export function setupScatterChart(element: HTMLButtonElement) {
 
   // html template delivered as closure functino, for future logic handling in the popup
   const HtmlTemplate = (data: d3.DSVRowString<string>) => {
