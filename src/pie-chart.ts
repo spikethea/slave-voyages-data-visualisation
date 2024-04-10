@@ -38,8 +38,9 @@ const svg = d3.select(element)
 
     // set the color scale
     const color = d3.scaleOrdinal()
-      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"])
-
+        .domain(["Denmark / Baltic", "France","Great Britain", "Netherlands", "Portugal / Brazil", "Spain / Uraguay"])
+        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]);
+    
     updateChart(data, yearInput, color);   
     
     
@@ -49,9 +50,7 @@ const svg = d3.select(element)
         yearInput = Number(target.value);
       };
 
-      const color = d3.scaleOrdinal()
-        .domain(["Denmark / Baltic", "France","Great Britain", "Netherlands", "Portugal / Brazil", "Spain / Uraguay"])
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]);
+      
 
       updateChart(data, yearInput, color)
     });
@@ -61,15 +60,27 @@ const svg = d3.select(element)
     if (!yearLabel) return;
     // Compute the position of each group on the pie:
     const pie = d3.pie()
-      .value(d=>d[1])
+      .value(function (d) {
+        console.log(d);
+        return d[1]
+      })
+      .sort(null)
 
-    const data_ready = pie(Object.entries(data[5]))
+    const data_ready = pie(Object.entries(data[yearIndex]))
 
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-    svg
-      .selectAll('whatever')
+    const u = svg.selectAll("path")
       .data(data_ready)
-      .join('path')
+
+
+      u
+      .join(
+        enter => enter.append("path"),
+        update => update,
+        exit => exit.remove()
+      )
+      .transition()
+      .duration(1000)
       .attr('d', d3.arc()
         .innerRadius(150)         // This is the size of the donut hole
         .outerRadius(radius)
@@ -78,6 +89,7 @@ const svg = d3.select(element)
       .attr("stroke", "black")
       .style("stroke-width", "2px")
       .style("opacity", 0.7)
+
 
       yearLabel.innerHTML = data[yearIndex][''];
   }
