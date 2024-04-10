@@ -56,15 +56,18 @@ const svg = d3.select(element)
     });
   });
 
-  function updateChart(data: any, yearIndex: number, colorScale) {
+  function updateChart(data: any, yearIndex: number, colorScale: d3.ScaleOrdinal<string, unknown, never>) {
     if (!yearLabel) return;
     // Compute the position of each group on the pie:
     const pie = d3.pie()
       .value(function (d) {
-        console.log(d);
-        return d[1]
+        if (d[0] !== "" && d[0] !== "Totals") {
+          console.log(d);
+          return d[1];
+        } else return;
+        
       })
-      .sort(null)
+      .sort((a, b) => Number(a[1]) - Number(b[1]))
 
     const data_ready = pie(Object.entries(data[yearIndex]))
 
