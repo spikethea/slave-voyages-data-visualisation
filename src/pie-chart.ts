@@ -5,7 +5,9 @@ export function setupPieChart(element: HTMLButtonElement, slider: HTMLInputEleme
 
 let yearInput = 5;
 
-
+const yearLabel = document.createElement('div');
+yearLabel.id = 'year-label';
+element.appendChild(yearLabel)
 
 
 // set the dimensions and margins of the graph
@@ -48,13 +50,15 @@ const svg = d3.select(element)
       };
 
       const color = d3.scaleOrdinal()
+        .domain(["Denmark / Baltic", "France","Great Britain", "Netherlands", "Portugal / Brazil", "Spain / Uraguay"])
         .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]);
 
       updateChart(data, yearInput, color)
     });
   });
 
-  function updateChart(data: any, year: number, colorScale) {
+  function updateChart(data: any, yearIndex: number, colorScale) {
+    if (!yearLabel) return;
     // Compute the position of each group on the pie:
     const pie = d3.pie()
       .value(d=>d[1])
@@ -70,11 +74,12 @@ const svg = d3.select(element)
         .innerRadius(150)         // This is the size of the donut hole
         .outerRadius(radius)
       )
-      .attr('fill', d => colorScale(d.data[year]))
+      .attr('fill', colorScale)
       .attr("stroke", "black")
       .style("stroke-width", "2px")
       .style("opacity", 0.7)
 
+      yearLabel.innerHTML = data[yearIndex][''];
   }
 
 }
