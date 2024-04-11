@@ -69,7 +69,10 @@ const svg = d3.select(element)
       })
       .sort((a, b) => Number(a[1]) - Number(b[1]))
 
-    const data_ready = pie(Object.entries(data[yearIndex]))
+    const data_ready = pie(Object.entries(data[yearIndex]));
+
+    let local = d3.local()
+    
 
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     const u = svg.selectAll("path")
@@ -82,8 +85,18 @@ const svg = d3.select(element)
         update => update,
         exit => exit.remove()
       )
+      .each(function(d) {
+        local.set(this, d)
+      })
       .transition()
       .duration(1000)
+      .attrTween('d', function(d) {
+        let i = d3.interpolate(local.get(this), d);
+        local.set(this, i(0));
+        return function(t) {
+          return arc(i(t));
+        }
+      })
       .attr('d', d3.arc()
         .innerRadius(150)         // This is the size of the donut hole
         .outerRadius(radius)
@@ -93,6 +106,9 @@ const svg = d3.select(element)
       .style("stroke-width", "2px")
       .style("opacity", 0.7)
 
+      u
+    .exit()
+    .remove()
 
       yearLabel.innerHTML = data[yearIndex][''];
   }
