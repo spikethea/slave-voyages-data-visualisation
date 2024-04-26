@@ -7,7 +7,29 @@
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div>
+        <h1>Addressing Misconceptions of the Slave Trade</h1>
+        <p >
+          A interactive data visualisation of the many voyages from europe to the americas in the transatlantic slave trade. 
+        </p>
+        <section>
+          <div class="card">
+            <div id="scatter-chart"></div>
+          </div>
+          <p class="read-the-docs">see above, a representative sample of all the european ships travelled back and forth from the coast of West/Central Africa to the Americas</p>
+          <h3>The transatlantic slave trade is rightfully regarded as one of humanities most darkest periods, full of atrocities and wrongdoings. In response to this, educational leaders in some countries have attempt to minimise thier impact, by claiming they ended it, or by simply refusing it acknowledge thier part in the event. This data visualisation attempts to show (and not tell) you, the veiwer, how the logistics of the Transatlantic Voyage can combat the myths and misrepresentation of history which we see in our modern day.</h3>
+        </section>
+        
+          <div id="pie-chart"></div>
+          <div class="">
+            <input type="range" min="1" max="100" value="50" class="piechart-slider" id="myRange">
+          </div>
+        <div class="card">
+          <div id="treemap"></div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
