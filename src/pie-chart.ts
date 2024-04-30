@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as d3 from 'd3';
 const filepath = "country-data.csv";
 
@@ -50,7 +51,7 @@ const svg = d3.select(element)
     // set the color scale
     const color = d3.scaleOrdinal()
         .domain(["Denmark / Baltic", "France","Great Britain", "Netherlands", "Portugal / Brazil", "Spain / Uraguay"])
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]);
+        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#a05d96"]);
     
     updateChart(data, yearInput, color);   
     
@@ -77,7 +78,7 @@ const svg = d3.select(element)
         } else return;
         
       })
-      .sort((a, b) => Number(a[1]) - Number(b[1]))
+      .sort(null)
 
     const data_ready = pie(Object.entries(data[yearIndex]));
     
@@ -103,9 +104,9 @@ const svg = d3.select(element)
         update => update,
         exit => exit.remove()
       )
-      .each(function(d) {
-        local.set(this, d)
-      })
+      // .each(function(d) {
+      //   local.set(this, d)
+      // })
       // .transition()
       // .duration(1000)
       // .attrTween('d', function(d) {

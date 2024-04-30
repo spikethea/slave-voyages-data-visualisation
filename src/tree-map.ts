@@ -1,3 +1,5 @@
+// Unused file
+//@ts-nocheck
 import * as d3 from 'd3';
 const filepath = "named-data.csv";
 
