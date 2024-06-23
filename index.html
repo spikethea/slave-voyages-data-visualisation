@@ -10,35 +10,70 @@
     <div id="app">
       <div>
         <h1>Addressing Misconceptions of the Slave Trade</h1>
-        <article>
-          <p>
-            A interactive data visualisation of the many voyages from europe to the americas in the transatlantic slave trade. <a href="https://www.theguardian.com/news/series/cotton-capital-ongoing-series">This data visualization was inspired by The Guardians 'Cotton Capital' specifically "It’s not unpatriotic to tell the whole truth about Britain and the end of slavery"</a>
-          </p>
-          <p>The transatlantic slave trade is often regarded as one of humanities most darkest periods, full of atrocities of a unprecedented scale. In response to this, some educational leaders & politicians have attempt to minimise thier nations impact,  by claiming they 'ended' Slavery, or simply refusing it acknowledge thier part in the event. This data visualisation attempts to show the viewer the logistics of the Transatlantic Voyage to combat the myths and misrepresentation of history which we see in our educational systems.</p>  
-        </article>
-        <section>
+        <div class="card">
           <article>
-            <h2>Did Britain 'End' Slavery?</h2>
-            <p>Sometimes, Britain is credited for 'ending the slavery trade in 1807. Other than Haiti and Denmark abolishing slavery prior, using this scatter graph, we can see the accelerated trend for larger & and more frequent ships carried enslaved people to the USA, Brazil & the Caribbean.</p>
-          </article>  
-            <div id="scatter-chart"></div>
-          <p class="read-the-docs">see above, a representative sample of all the european ships travelled back and forth from the coast of West/Central Africa to the Americas</p>
+            <p>
+              A interactive data visualisation of the many voyages from europe to the americas in the transatlantic slave trade. <a href="https://www.theguardian.com/news/series/cotton-capital-ongoing-series">This data visualization was inspired by The Guardians 'Cotton Capital' specifically "It’s not unpatriotic to tell the whole truth about Britain and the end of slavery"</a>
+            </p>
+          </article>
+            <img class="diagram" src="./public/images/captive-slaves.jpg" alt="This diagram depicts the Volume and direction of the trans-Atlantic slave trade from West Africa to the americas" />
+            <p><a href="https://www.slavevoyages.org/blog/volume-and-direction-trans-atlantic-slave-trade">Etlis, Richardson (2022)</a></p>
+          <article>
+            <p>The transatlantic slave trade is often regarded as one of humanities most darkest periods, full of atrocities of a unprecedented scale. In response to this, certain educational leaders & politicians have attempt to minimise thier nations impact, by claiming a nation/empire 'ended' Slavery, or simply refusing it acknowledge its part in the event. </p>
+            <p>This data visualisation attempts to show the viewer the logistics of the Transatlantic Voyage to combat the myths and misrepresentation of history which we see in our educational systems.</p>  
+          </article>
         </div>
-        </section>
+        <div class="card">
+          <section>
+            <article>
+              <h2>Did Britain 'End' Slavery?</h2>
+              <p>Sometimes, Britain is credited for ending the slavery trade in 1807 with the abolishment of slavery. This is false. Other than Haiti and Denmark abolishing slavery prior, using this scatter graph, we can see the accelerated trend for larger & and more frequent ships carrying enslaved people to the USA, Brazil & the Caribbean.</p>
+            </article>  
+              <div class="diagram" id="scatter-chart"></div>
+            <p class="read-the-docs">See above, interacter scatter graph which dots every single documented slave ship passage which travelled back and forth from the coast of West/Central Africa to the Americas, from 1500 to 1809</p>
+          </div>
+          </section>
+        </div>
         <div class="card">
           <article>
             <h2>Who where the biggest players?</h2>
-            <p>Often, the British and French are highlighted as key players, but with this timelined pie chart, it can be shown how large a part Portugal played, and how this evolved and changed over centuries.</p>
+            <p>Often, the British and French are highlighted as key players, but with this timelined pie chart, it can be shown how large a proportion Portugal and Spain played, and how this evolved and changed over centuries.</p>
           </article>
-          <div id="pie-chart"></div>
-          <div class="">
-            <input type="range" min="1" max="100" value="50" class="piechart-slider" id="myRange">
+          <div class="diagram" >
+            <div id="pie-chart"></div>
+            <div class="">
+              <input type="range" min="1" max="100" value="50" id="pie-chart_range-slider" >
+            </div>
           </div>
-          
+          <p class="read-the-docs">Using the slider to change results, find a representative Pie chart of the numbers of captured African slaves taken across the atlantic from different European Empires, in each time frame. 1526 - 1875</p>
+          <article>
+            <p>Through the timelapsed chart we can see that from 1800's onwards, the role which Portugal and its associated empire played was exponentially increasing across the altantic passage as britain passed the <a href="https://en.wikipedia.org/wiki/Atlantic_slave_trade#cite_ref-146">Slavery Trade Act. </a> This change can caused increase in the price of price of slaves, which the portuguese <i>Prazeros</i> took advantage of.</p>
+            <p>In addition to Portugal, Spain / Uruguay also played a large part in this last stage of the Altantic Trade. With little to no competition, for the last sixteen years of the transatlantic slave trade, Spain was the only transatlantic slave-trading empire.</p>
+          </article>
         </div>
         <div class="card">
           <div id="treemap"></div>
         </div>
+        <footer>
+          <h4 class="logo"><a class="quincegr" href="https://quincegr.com">quincegr.com</a></h4>
+          <ul class="social-media">
+            <li>
+                <a href="https://www.linkedin.com/in/quince-gore-rodney-41b3081b6/">
+                    <img src="./public/images/svg/linkedIn.svg"/>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/channel/UCNzbjdOHAKSBD-3XRIy2QgA/featured">
+                    <img src="./public/images/svg/youtube.svg"/>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/spikethea">
+                    <img src="./public/images/svg/github.svg"/>
+                </a>
+            </li>
+        </ul>
+        </footer>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>

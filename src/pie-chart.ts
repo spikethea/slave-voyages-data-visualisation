@@ -19,8 +19,8 @@ element.appendChild(yearLabel)
 
 
 // set the dimensions and margins of the graph
-const width = 850,
-    height = 450,
+const width = 1000,
+    height = 550,
     margin = 40;
 
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
@@ -36,7 +36,7 @@ const svg = d3.select(element)
 
   // create reusable arc for fture use
     const arc = d3.arc()
-    .innerRadius(100)// This is the size of the donut hole
+    .innerRadius(150)// This is the size of the donut hole
     .outerRadius(radius* 0.8)
     
 
@@ -69,19 +69,23 @@ const svg = d3.select(element)
   });
 
   function updateChart(data: any, yearIndex: number, colorScale: d3.ScaleOrdinal<string, unknown, never>) {
-    console.log('updatechart')
+    const keyedData = Object.entries(data[yearIndex]);
+    const filtered = data.filter((d) => console.log(d));
     if (!yearLabel) return;
     // Compute the position of each group on the pie:
     const pie = d3.pie()
       .value(function (d) {
+        // filtering out the total, and empty values
         if (d[0] !== "" && d[0] !== "Totals") {
           return d[1];
         } else return;
         
       })
+      // change the starting angle back, because the dataset has many data fields, causing visual clutter with the side-labels
+      .startAngle(-Math.PI / 3)
       .sort(null)
 
-    const data_ready = pie(Object.entries(data[yearIndex]));
+    const data_ready = pie(keyedData);
     
     let local = d3.local()
     
@@ -89,8 +93,6 @@ const svg = d3.select(element)
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     const u = svg.selectAll("path")
       .data(data_ready)
-
-    console.log(u);
 
     u.transition().duration(1000).attr("d", arc)
       
@@ -158,6 +160,8 @@ const svg = d3.select(element)
       update => update,
       exit => exit.remove()
     )
+      // filtered out 'Totals' out of the polylines
+      .filter((d, i) => d.data[0] !== 'Totals')
       .attr("stroke", "black")
       .style("fill", "none")
       .attr("stroke-width", 1)
@@ -177,14 +181,16 @@ const svg = d3.select(element)
   .attr('class', 'pie-chart-label')
   .attr("text-anchor", "middle")
   .selectAll('text')
-  
   .data(data_ready)
   .join(
     enter => enter.append("text"),
     update => update,
     exit => exit.remove()
   )
+  // filtered out 'Totals' out of the text labels
+  .filter((d, i) => d.data[0] !== 'Totals')
   .attr('transform', function(d) {
+    console.log(d.data[0])
       var pos = outerArc.centroid(d);
       var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
       pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
@@ -195,6 +201,7 @@ const svg = d3.select(element)
       return (midangle < Math.PI ? 'start' : 'end')
   })
   .text(d => d.data[0])
+
 
   return svg.node();
 }

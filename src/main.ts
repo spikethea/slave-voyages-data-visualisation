@@ -7,6 +7,6 @@ import {setupPieChart} from './pie-chart.ts'
 setupScatterChart(document.querySelector<HTMLButtonElement>('#scatter-chart')!);
 setupPieChart(
   document.querySelector<HTMLButtonElement>('#pie-chart')!,
-  document.querySelector<HTMLInputElement>('.piechart-slider')!
+  document.querySelector<HTMLInputElement>('#pie-chart_range-slider')!
 );
 //setupTreeMap(document.querySelector<HTMLDivElement>('.treemap')!)

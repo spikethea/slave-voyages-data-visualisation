@@ -15,7 +15,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #5b78c2;
   text-decoration: inherit;
 }
 a:hover {
@@ -30,16 +30,35 @@ body {
   min-height: 100vh;
 }
 
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background: #434343;
+}
+
 article {
-  padding-left: 3rem;
+  border-left: 1px solid black;
+  background-color: #f6f6f6;
+  width: 100%;
+  padding: 2rem;
   max-width: 50%;
-  margin: auto 0;
+}
+
+.diagram {
+  margin: 2rem;
+  border: 1px solid black;
+  background: #fffaef;
 }
 
 h1 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+.logo {
+  color: white;
 }
 
 #pie-chart {
@@ -64,6 +83,10 @@ h1 {
   font-weight: bold;
 }
 
+#pie-chart_range-slider {
+  width: 80%;
+}
+
 .pie-chart-label text {
   display: block;
   white-space: normal !important;
@@ -80,10 +103,28 @@ h1 {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0 ;
   text-align: center;
+}
+
+.quincegr {
+  font-size: 2rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: white;
+}
+
+.social-media {
+  display: flex;
+  list-style-type: none;
+  
+}
+
+.social-media li a img {
+    height: 2rem;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 50%;
+    background-color: white;
 }
 
 .logo {
@@ -104,6 +145,7 @@ h1 {
 }
 
 .read-the-docs {
+  font-size: 0.8rem;
   color: #888;
 }
 
