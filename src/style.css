@@ -32,7 +32,7 @@ body {
 
 article {
   padding-left: 3rem;
-  max-width: 65%;
+  max-width: 50%;
   margin: auto 0;
 }
 
@@ -62,6 +62,17 @@ h1 {
   transform: translate(-50%, -50%);
   font-size: 3rem;
   font-weight: bold;
+}
+
+.pie-chart-label text {
+  display: block;
+  white-space: normal !important;
+  position: relative;
+  font-size: 12px;
+  border-radius: 1.5rem;
+  border: 1px solid black;
+  padding: 1rem;
+  background-color: white;
 }
 
 #country-label {

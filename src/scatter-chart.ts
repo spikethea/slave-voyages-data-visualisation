@@ -19,8 +19,8 @@ export function setupScatterChart(element: HTMLButtonElement) {
   }
   
   let margin = {top: 10, right: 30, bottom: 30, left: 60};
-    let width = 800 - margin.left - margin.right;
-    let height = 400 - margin.top - margin.bottom;
+    let width = 1000 - margin.left - margin.right;
+    let height = 640 - margin.top - margin.bottom;
 
   const svg = d3.select(element)
   .append("svg")

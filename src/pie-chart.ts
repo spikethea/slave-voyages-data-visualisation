@@ -19,7 +19,7 @@ element.appendChild(yearLabel)
 
 
 // set the dimensions and margins of the graph
-const width = 450,
+const width = 850,
     height = 450,
     margin = 40;
 
@@ -36,8 +36,9 @@ const svg = d3.select(element)
 
   // create reusable arc for fture use
     const arc = d3.arc()
-    .innerRadius(150)// This is the size of the donut hole
-    .outerRadius(radius)
+    .innerRadius(100)// This is the size of the donut hole
+    .outerRadius(radius* 0.8)
+    
 
 // load csv data asynchronously, then call the handler the manipulate the data
   d3.csv(filepath).then(function (data) {
@@ -135,24 +136,6 @@ const svg = d3.select(element)
         }
       });
 
-      
-      
-
-
-      svg
-      .attr("font-family", "sans-serif")
-      .attr("font-size", 12)
-      .attr("text-anchor", "middle")
-      .selectAll('text')
-      
-      .data(data_ready)
-      .join(
-        enter => enter.append("text"),
-        update => update,
-        exit => exit.remove()
-      )
-        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .text(d => d.data[0])
 
     u
     .exit()
@@ -160,7 +143,59 @@ const svg = d3.select(element)
 
       yearLabel.innerHTML = data[yearIndex][''];
 
-      return svg.node();
-  }
+  // creating the off-chart labels and polylines for the donut chart
 
+    // reusable 'ghost' arc for label outer circle
+    const outerArc = d3.arc()
+    .innerRadius(radius)// This is the size of the donut hole
+    .outerRadius(radius)
+
+    svg
+    .selectAll('polyline')
+    .data(data_ready)
+    .join(
+      enter => enter.append("polyline"),
+      update => update,
+      exit => exit.remove()
+    )
+      .attr("stroke", "black")
+      .style("fill", "none")
+      .attr("stroke-width", 1)
+      .attr('points', function(d) {
+        var posA = arc.centroid(d) // line insertion in the slice
+        var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
+        var posC = outerArc.centroid(d); // Label position = almost the same as posB
+        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
+        posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+        return [posA, posB, posC]
+      })
+    
+
+  svg
+  .attr("font-family", "sans-serif")
+  .attr("text-anchor", "middle")
+  .attr('class', 'pie-chart-label')
+  .attr("text-anchor", "middle")
+  .selectAll('text')
+  
+  .data(data_ready)
+  .join(
+    enter => enter.append("text"),
+    update => update,
+    exit => exit.remove()
+  )
+  .attr('transform', function(d) {
+      var pos = outerArc.centroid(d);
+      var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+      pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
+      return 'translate(' + pos + ')';
+  })
+  .style('text-anchor', function(d) {
+      var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+      return (midangle < Math.PI ? 'start' : 'end')
+  })
+  .text(d => d.data[0])
+
+  return svg.node();
+}
 }
