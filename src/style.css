@@ -30,6 +30,12 @@ body {
   min-height: 100vh;
 }
 
+article {
+  padding-left: 3rem;
+  max-width: 65%;
+  margin: auto 0;
+}
+
 h1 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 3.2em;

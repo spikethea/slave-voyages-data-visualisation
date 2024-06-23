@@ -1,5 +1,6 @@
 //@ts-nocheck
 import * as d3 from 'd3';
+import GSAP from 'gsap';
 const filepath = "country-data.csv";
 
 export function setupPieChart(element: HTMLButtonElement, slider: HTMLInputElement) {
@@ -38,15 +39,12 @@ const svg = d3.select(element)
     .innerRadius(150)// This is the size of the donut hole
     .outerRadius(radius)
 
-// // Create dummy data
-// const data = {a: 9, b: 20, c:30, d:8, e:12}
+// load csv data asynchronously, then call the handler the manipulate the data
   d3.csv(filepath).then(function (data) {
-    console.log(data);
     // setting up range slider 
     slider.min = '1';
     
     slider.setAttribute('max', `${data.length - 1}`);
-    console.log(slider);
 
     // set the color scale
     const color = d3.scaleOrdinal()
@@ -65,10 +63,12 @@ const svg = d3.select(element)
       
 
       updateChart(data, yearInput, color)
+      
     });
   });
 
   function updateChart(data: any, yearIndex: number, colorScale: d3.ScaleOrdinal<string, unknown, never>) {
+    console.log('updatechart')
     if (!yearLabel) return;
     // Compute the position of each group on the pie:
     const pie = d3.pie()
@@ -88,6 +88,10 @@ const svg = d3.select(element)
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     const u = svg.selectAll("path")
       .data(data_ready)
+
+    console.log(u);
+
+    u.transition().duration(1000).attr("d", arc)
       
     // svg.on('mouseover', function (event, d) {
     //   d3.select(this).transition()
@@ -96,7 +100,7 @@ const svg = d3.select(element)
     //     countryLabel.textContent = `${d.value}`;
     //     console.log(d)
     // })
-
+      
 
       u
       .join(
@@ -104,24 +108,35 @@ const svg = d3.select(element)
         update => update,
         exit => exit.remove()
       )
-      // .each(function(d) {
-      //   local.set(this, d)
-      // })
-      // .transition()
-      // .duration(1000)
-      // .attrTween('d', function(d) {
-      //   let i = d3.interpolate(local.get(this), d);
-      //   local.set(this, i(0));
-      //   return function(t) {
-      //     return arc(i(t));
-      //   }
-      // })
+      .each(function(d) {
+        local.set(this, d)
+        console.log(d)
+        // GSAP.fromTo(d, {
+        //   duration: 1000,
+        //   attr: {
+        //     start: d.startAngle, end: d.endAngle  
+        //   },
+        //   ease: "bounce"
+        // })
+      })
       .attr('d', arc
       )
       .attr('fill', colorScale)
       .attr("stroke", "black")
       .style("stroke-width", "2px")
       .style("opacity", 0.7)
+      .transition()
+      .duration(1000)
+      .attrTween("d", function (d) {
+        var i = d3.interpolate(d.startAngle, d.endAngle);
+        return function (t) {
+            d.endAngle = i(t);
+            return arc(d);
+        }
+      });
+
+      
+      
 
 
       svg
