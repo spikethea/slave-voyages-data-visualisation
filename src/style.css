@@ -13,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  font-size: 16px;
+}
+
 a {
   font-weight: 500;
   color: #5b78c2;
@@ -35,6 +39,7 @@ footer {
   flex-direction: row;
   justify-content: space-around;
   background: #434343;
+  min-height: 35vh;
 }
 
 article {
@@ -42,13 +47,16 @@ article {
   background-color: #f6f6f6;
   width: 100%;
   padding: 2rem;
-  max-width: 50%;
 }
 
 .diagram {
   margin: 2rem;
   border: 1px solid black;
   background: #fffaef;
+}
+
+p {
+  font-size: 2rem;
 }
 
 h1 {
@@ -64,6 +72,15 @@ h1 {
 #pie-chart {
   position: relative;
 }
+
+#pie-chart path {
+  stroke-width: 0.2;
+}
+
+#pie-chart polyline {
+  stroke-width: 0.2;
+}
+
 
 .info-bubble {
   position: absolute;
@@ -87,11 +104,39 @@ h1 {
   width: 80%;
 }
 
+/* The slider itself */
+#pie-chart_range-slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+#pie-chart_range-slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#pie-chart_range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
 .pie-chart-label text {
   display: block;
   white-space: normal !important;
   position: relative;
-  font-size: 12px;
+  font-size: 0.3rem;
   border-radius: 1.5rem;
   border: 1px solid black;
   padding: 1rem;
@@ -168,15 +213,40 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+
+:root {
+  color: #213547;
+  background-color: #ffffff;
+}
+a:hover {
+  color: #747bff;
+}
+button {
+  background-color: #f9f9f9;
+}
+
+@media only screen and (min-width: 768px) {
+  article {
+    max-width: 50%;
   }
-  a:hover {
-    color: #747bff;
+
+  .pie-chart-label text {
+    font-size: 0.2rem;
   }
-  button {
-    background-color: #f9f9f9;
+
+  #pie-chart svg {
+    max-height: 85vh;
+  }
+
+  #pie-chart path {
+    stroke-width: 0.2;
+  }
+
+  #pie-chart polyline {
+    stroke-width: 0.4;
+  }
+
+  p {
+    font-size: 1rem;
   }
 }

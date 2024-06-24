@@ -19,8 +19,8 @@ element.appendChild(yearLabel)
 
 
 // set the dimensions and margins of the graph
-const width = 1000,
-    height = 550,
+const width = 200,
+    height = 200,
     margin = 40;
 
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
@@ -29,14 +29,13 @@ const radius = Math.min(width, height) / 2 - margin
 
 const svg = d3.select(element)
   .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-  .append("g")
-    .attr("transform", `translate(${width / 2},${height / 2})`);
+    .attr("viewBox", `0 0 ${height} ${width}`)
+    .append("g")
+      .attr("transform", `translate(${width / 2},${height / 2})`);
 
   // create reusable arc for fture use
     const arc = d3.arc()
-    .innerRadius(150)// This is the size of the donut hole
+    .innerRadius(radius* 0.5)// This is the size of the donut hole
     .outerRadius(radius* 0.8)
     
 
@@ -126,7 +125,7 @@ const svg = d3.select(element)
       )
       .attr('fill', colorScale)
       .attr("stroke", "black")
-      .style("stroke-width", "2px")
+      .style("stroke-width", "0.2")
       .style("opacity", 0.7)
       .transition()
       .duration(1000)
