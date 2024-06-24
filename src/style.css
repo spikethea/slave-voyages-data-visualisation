@@ -100,10 +100,6 @@ h1 {
   font-weight: bold;
 }
 
-#pie-chart_range-slider {
-  width: 80%;
-}
-
 /* The slider itself */
 #pie-chart_range-slider {
   -webkit-appearance: none;  /* Override default CSS styles */
@@ -228,6 +224,10 @@ button {
 @media only screen and (min-width: 768px) {
   article {
     max-width: 50%;
+  }
+
+  #pie-chart_range-slider {
+    width: 80%;
   }
 
   .pie-chart-label text {
