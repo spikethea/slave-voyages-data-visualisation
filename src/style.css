@@ -186,7 +186,7 @@ h1 {
 }
 
 .read-the-docs {
-  font-size: 0.8rem;
+  font-size: 1.6rem;
   color: #888;
 }
 
@@ -224,6 +224,11 @@ button {
 @media only screen and (min-width: 768px) {
   article {
     max-width: 50%;
+  }
+
+  .read-the-docs {
+    font-size: 0.8rem;
+    color: #888;
   }
 
   #pie-chart_range-slider {
